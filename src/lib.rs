@@ -11,20 +11,7 @@ pub fn sum_even(values: &[i64]) -> i64 {
 /// Подсчёт ненулевых байтов. Буфер намеренно не освобождается,
 /// что приведёт к утечке памяти (Valgrind это покажет).
 pub fn leak_buffer(input: &[u8]) -> usize {
-    let boxed = input.to_vec().into_boxed_slice();
-    let len = input.len();
-    let raw = Box::into_raw(boxed) as *mut u8;
-
-    let mut count = 0;
-    let _drop = unsafe {
-        for i in 0..len {
-            if *raw.add(i) != 0_u8 {
-                count += 1;
-            }
-        }
-        Box::from_raw(std::slice::from_raw_parts_mut(raw, len))
-    };
-    count
+    input.iter().filter(|&v| *v != 0).count()
 }
 
 /// Небрежная нормализация строки: удаляем пробелы и приводим к нижнему регистру,
