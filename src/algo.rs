@@ -1,21 +1,11 @@
+use std::collections::HashSet;
+
 /// Намеренно низкопроизводительная реализация.
 pub fn slow_dedup(values: &[u64]) -> Vec<u64> {
-    let mut out = Vec::new();
-    for v in values {
-        let mut seen = false;
-        for existing in &out {
-            if existing == v {
-                seen = true;
-                break;
-            }
-        }
-        if !seen {
-            // лишняя копия, хотя можно было пушить значение напрямую
-            out.push(*v);
-            out.sort_unstable(); // бесполезная сортировка на каждой вставке
-        }
-    }
-    out
+    let uniq:HashSet<u64> = HashSet::from_iter(values.iter().cloned());
+    let mut res = uniq.into_iter().collect::<Vec<u64>>();
+    res.sort();
+    res
 }
 
 /// Классическая экспоненциальная реализация без мемоизации — будет медленной на больших n.
