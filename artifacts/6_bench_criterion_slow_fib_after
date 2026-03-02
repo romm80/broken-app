@@ -1,0 +1,22 @@
+Gnuplot not found, using plotters backend
+sum_even_broken         time:   [8.1548 µs 8.3243 µs 8.5733 µs]
+                        change: [-0.5700% +2.2263% +4.9696%] (p = 0.11 > 0.05)
+                        No change in performance detected.
+Found 11 outliers among 100 measurements (11.00%)
+  8 (8.00%) high mild
+  3 (3.00%) high severe
+
+slow_fib_broken         time:   [18.221 ns 18.347 ns 18.549 ns]
+                        change: [-100.000% -100.000% -100.000%] (p = 0.00 < 0.05)
+                        Performance has improved.
+Found 14 outliers among 100 measurements (14.00%)
+  9 (9.00%) high mild
+  5 (5.00%) high severe
+
+slow_dedup_broken       time:   [9.2011 ms 9.3122 ms 9.5084 ms]
+                        change: [-1.9971% +0.5635% +3.2670%] (p = 0.74 > 0.05)
+                        No change in performance detected.
+Found 5 outliers among 100 measurements (5.00%)
+  1 (1.00%) low mild
+  2 (2.00%) high mild
+  2 (2.00%) high severe
