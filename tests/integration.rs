@@ -27,6 +27,10 @@ fn fib_small_numbers() {
 #[test]
 fn normalize_simple() {
     assert_eq!(normalize(" Hello World "), "helloworld");
+
+    assert_eq!(normalize(r#"
+     Hello
+             World "#), "helloworld");
 }
 
 #[test]

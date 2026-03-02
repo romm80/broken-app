@@ -17,7 +17,11 @@ pub fn leak_buffer(input: &[u8]) -> usize {
 /// Небрежная нормализация строки: удаляем пробелы и приводим к нижнему регистру,
 /// но игнорируем повторяющиеся пробелы/табуляции внутри текста.
 pub fn normalize(input: &str) -> String {
-    input.replace(' ', "").to_lowercase()
+    input
+        .chars()
+        .filter(|c| !c.is_whitespace())
+        .flat_map(|c| c.to_lowercase())
+        .collect()
 }
 
 /// Логическая ошибка: усредняет по всем элементам, хотя требуется учитывать
