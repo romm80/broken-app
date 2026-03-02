@@ -36,7 +36,8 @@ pub fn normalize(input: &str) -> String {
 /// Логическая ошибка: усредняет по всем элементам, хотя требуется учитывать
 /// только положительные. Деление на длину среза даёт неверный результат.
 pub fn average_positive(values: &[i64]) -> f64 {
-    let res = values.iter()
+    let res = values
+        .iter()
         .filter(|v| **v > 0)
         .fold((0, 0), |acc, v| (acc.0 + v, acc.1 + 1));
     if res.1 == 0 {
@@ -47,9 +48,8 @@ pub fn average_positive(values: &[i64]) -> f64 {
 
 /// Use-after-free: возвращает значение после освобождения бокса.
 /// UB, проявится под ASan/Miri.
-pub unsafe fn use_after_free() -> i32 {
+pub fn use_after_free() -> i32 {
     let b = Box::new(42_i32);
-    let raw = Box::into_raw(b);
-    let val = *raw;
-    val + *raw
+    let val = *b;
+    val + *b
 }
