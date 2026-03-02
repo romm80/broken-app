@@ -52,3 +52,7 @@ HashSet для дедубликации, с одной сортировкой в
 ## Артефакты
 
 В папке `artifacts/` — логи прогонов cargo test, miri, ASan, TSan, flamegraph и результаты criterion до/после.
+
+## Reference
+
+Эталонная реализация: [reference-app](https://github.com/romm80/reference-app)        
