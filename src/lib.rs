@@ -16,14 +16,14 @@ pub fn leak_buffer(input: &[u8]) -> usize {
     let raw = Box::into_raw(boxed) as *mut u8;
 
     let mut count = 0;
-    unsafe {
+    let _drop = unsafe {
         for i in 0..len {
             if *raw.add(i) != 0_u8 {
                 count += 1;
             }
         }
-        // утечка: не вызываем Box::from_raw(raw);
-    }
+        Box::from_raw(std::slice::from_raw_parts_mut(raw, len))
+    };
     count
 }
 
