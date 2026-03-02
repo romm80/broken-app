@@ -1,4 +1,4 @@
-use broken_app::{algo, leak_buffer, normalize, sum_even};
+use broken_app::{algo, leak_buffer, normalize, sum_even, concurrency};
 
 #[test]
 fn sums_even_numbers() {
@@ -43,4 +43,12 @@ fn averages_only_positive() {
 #[test]
 fn use_after_free() {
     assert_eq!(84, broken_app::use_after_free());
+}
+
+#[test]
+fn concurrency() {
+    assert_eq!(4, concurrency::race_increment(2,2));
+    assert_eq!(4, concurrency::read_after_sleep());
+    concurrency::reset_counter();
+    assert_eq!(0, concurrency::read_after_sleep());
 }

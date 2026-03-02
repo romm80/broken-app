@@ -1,0 +1,49 @@
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.03s
+
+     Running unittests src/bin/demo.rs (target/miri/aarch64-apple-darwin/debug/deps/demo-906b7318bdaac525)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.03s
+
+     Running tests/integration.rs (target/miri/aarch64-apple-darwin/debug/deps/integration-fabec562e7e72c6a)
+
+running 9 tests
+test averages_only_positive ... ok
+test concurrency ... error: Undefined Behavior: Data race detected between (1) non-atomic write on thread `unnamed-3` and (2) non-atomic read on thread `unnamed-4` at alloc46667
+  --> src/concurrency.rs:15:21
+   |
+15 |                     COUNTER += 1;
+   |                     ^^^^^^^^^^^^ (2) just happened here
+   |
+help: and (1) occurred earlier here
+  --> src/concurrency.rs:15:21
+   |
+15 |                     COUNTER += 1;
+   |                     ^^^^^^^^^^^^
+   = help: this indicates a bug in the program: it performed an invalid operation, and caused Undefined Behavior
+   = help: see https://doc.rust-lang.org/nightly/reference/behavior-considered-undefined.html for further information
+   = note: this is on thread `unnamed-4`
+note: the current function got called indirectly due to this code
+  --> src/concurrency.rs:12:22
+   |
+12 |           handles.push(thread::spawn(move || {
+   |  ______________________^
+13 | |             for _ in 0..iterations {
+14 | |                 unsafe {
+15 | |                     COUNTER += 1;
+...  |
+18 | |         }));
+   | |__________^
+
+note: some details are omitted, run with `MIRIFLAGS=-Zmiri-backtrace=full` for a verbose backtrace
+
+error: aborting due to 1 previous error
+
+error: test failed, to rerun pass `--test integration`
+
+Caused by:
+  process didn't exit successfully: `/Users/romm/.rustup/toolchains/nightly-aarch64-apple-darwin/bin/cargo-miri runner /Users/romm/dev/rust/practicum/debugging_optimization/broken-app/target/miri/aarch64-apple-darwin/debug/deps/integration-fabec562e7e72c6a` (exit status: 1)
+note: test exited abnormally; to see the full output pass --no-capture to the harness.
