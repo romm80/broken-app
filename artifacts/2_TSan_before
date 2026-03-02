@@ -1,0 +1,22 @@
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/integration.rs (target/aarch64-apple-darwin/debug/deps/integration-41dda58950a61bea)
+
+running 6 tests
+test averages_only_positive ... FAILED
+test counts_non_zero_bytes ... ok
+test dedup_preserves_uniques ... ok
+test fib_small_numbers ... ok
+test normalize_simple ... ok
+test sums_even_numbers ... 
+thread 'sums_even_numbers' (1605771) panicked at src/lib.rs:11:29:
+unsafe precondition(s) violated: slice::get_unchecked requires that the index is within the slice
+
+This indicates a bug in the program. This Undefined Behavior check is optional, and cannot be relied on for safety.
+thread caused non-unwinding panic. aborting.
+error: test failed, to rerun pass `--test integration`
+
+Caused by:
+  process didn't exit successfully: `/Users/romm/dev/rust/practicum/debugging_optimization/broken-app/target/aarch64-apple-darwin/debug/deps/integration-41dda58950a61bea --test-threads=1` (signal: 6, SIGABRT: process abort signal)
