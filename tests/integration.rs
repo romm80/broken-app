@@ -47,8 +47,8 @@ fn use_after_free() {
 
 #[test]
 fn concurrency() {
-    assert_eq!(4, concurrency::race_increment(2,2));
-    assert_eq!(4, concurrency::read_after_sleep());
+    assert_eq!(80_000, concurrency::race_increment(8,10_000));
+    assert_eq!(80_000, concurrency::read_after_sleep());
     concurrency::reset_counter();
     assert_eq!(0, concurrency::read_after_sleep());
 }
