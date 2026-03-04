@@ -1,4 +1,4 @@
-/// Вариант 1 (алгоритмическая): оригинальный O(n²) цикл → HashSet, O(n) среднее
+/// Вариант 1: (алгоритмическая): оригинальный O(n²) цикл → HashSet, O(n) среднее
 /// Вариант 2: (микро): HashSet → sort_unstable + dedup, O(n log n)
 pub fn slow_dedup(values: &[u64]) -> Vec<u64> {
     let mut res = values.to_vec();
