@@ -1,10 +1,9 @@
-use std::collections::HashSet;
-
-/// Намеренно низкопроизводительная реализация.
+/// Вариант 1 (алгоритмическая): оригинальный O(n²) цикл → HashSet, O(n) среднее
+/// Вариант 2: (микро): HashSet → sort_unstable + dedup, O(n log n)
 pub fn slow_dedup(values: &[u64]) -> Vec<u64> {
-    let uniq:HashSet<u64> = HashSet::from_iter(values.iter().cloned());
-    let mut res = uniq.into_iter().collect::<Vec<u64>>();
-    res.sort();
+    let mut res = values.to_vec();
+    res.sort_unstable();
+    res.dedup();
     res
 }
 
